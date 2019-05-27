@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/styles :: head"></head>
+<body>
+
+    <div th:replace="fragments/header :: authorized_header">&nbsp;</div>
+
+    <section class="main_part">
+
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-4">
+                    <h2>Users:</h2>
+
+                    <ul>
+                        <li th:each="user : ${users}" >
+                            <a th:href="'/users/' + ${user.id}">
+                                <span th:text="${user.username}"></span>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <div th:replace="fragments/styles :: styles">&nbsp;</div>
+</body>
+</html>

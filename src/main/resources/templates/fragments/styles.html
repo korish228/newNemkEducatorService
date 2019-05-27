@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <title th:text="${title}"></title>
+</head>
+<body>
+
+<div th:fragment="styles">
+    <style >
+
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
+
+        *:before, *:after {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
+
+        *::-webkit-input-placeholder {
+            color: #666;
+            opacity: 1; }
+
+        *:-moz-placeholder {
+            color: #666;
+            opacity: 1; }
+
+        *::-moz-placeholder {
+            color: #666;
+            opacity: 1; }
+
+        *:-ms-input-placeholder {
+            color: #666;
+            opacity: 1; }
+
+        body input:focus:required:invalid,
+        body textarea:focus:required:invalid {
+            color: #666; }
+
+        body input:required:valid,
+        body textarea:required:valid {
+            color: #666; }
+
+        html, body {
+            height: 100%;
+            padding: 0;
+            margin: 0; }
+
+        body {
+            font-size: 14px;
+            min-width: 320px;
+            position: relative;
+            line-height: 1.65;
+            font-family: "roboto-example", sans-serif;
+            overflow-x: hidden;
+            background-color: #DEDEDE; }
+
+        .img-responsive {
+            display: block;
+            max-width: 100%;
+            height: auto; }
+
+        .text-center {
+            text-align: center; }
+
+        h1 {
+            font-size: 36px; }
+
+        h2 {
+            font-size: 18px;
+            margin: 0; }
+
+        h3, p, a {
+            font-size: 16px; }
+
+        .top_line {
+            background-color: #0097A7;
+            width: 100vw;
+            padding: 25px 0;
+            margin-bottom: 25px; }
+
+        .top_line a {
+            color: #fff;
+            padding: 0;
+            margin: 0; }
+
+        .top_line .right_side {
+            text-align: right; }
+
+        .top_line .right_side a {
+            margin-right: 30px; }
+
+        .unauthorized_top_line .right_side a {
+            margin-left: 0; }
+
+        .authorized_top_line .left_side a {
+            margin-right: 30px; }
+
+        .main_part .info_about_service {
+            text-align: center; }
+
+        .main_part .info_about_service img {
+            margin: 20px 0; }
+
+        .main_part .info_about_service .buttons {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-justify-content: space-around;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            outline: none; }
+
+        .main_part .info_about_service .buttons a {
+            background-color: #0097A7;
+            color: #fff;
+            padding: 10px 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            float: left;
+            display: block; }
+
+        .main_part .info_about_service .buttons a:last-child {
+            float: right; }
+
+        .main_part .form_block {
+            margin: 50px auto; }
+
+        .main_part .form_block .login-form {
+            padding: 0;
+            margin: 0;
+            width: 350px; }
+
+        .main_part .form_block .login-form .login100-form-title {
+            font-size: 18px;
+            color: #212121;
+            display: block; }
+
+        .main_part .form_block .login-form .wrap-input100 {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            margin-bottom: 10px; }
+
+        .main_part .form_block .login-form .wrap-input100 .input100 {
+            display: block;
+            width: 100%;
+            height: 50px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            padding: 0 10px 0 68px;
+            border: 1px solid #212121;
+            margin: 20px 0; }
+
+        .main_part .form_block .login-form .wrap-input100 .input100:focus {
+            outline: none; }
+
+        .main_part .form_block .login-form .wrap-input100 .symbol-input {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            position: absolute;
+            -webkit-border-radius: 25px;
+            border-radius: 25px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding-left: 35px;
+            pointer-events: none;
+            color: #212121;
+            -webkit-transition: all 0.4s;
+            -o-transition: all 0.4s;
+            transition: all 0.4s; }
+
+        .main_part .form_block .login-form .container-login-form-btn .login100-form-btn {
+            text-transform: uppercase;
+            background-color: #0097A7;
+            color: #fff;
+            padding: 10px 25px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            background: #0097A7;
+            -webkit-transition: all 0.25s;
+            -o-transition: all 0.25s;
+            transition: all 0.25s;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 10px; }
+
+        .main_part .form_block .login-form .container-login-form-btn .login100-form-btn:hover {
+            background: #212121;
+            -webkit-transition: all 0.25s;
+            -o-transition: all 0.25s;
+            transition: all 0.25s; }
+
+        .main_part .signup_form {
+            padding: 0;
+            margin: 0; }
+
+        .main_part .signup_form span {
+            font-size: 24px;
+            margin-bottom: 10px; }
+
+        .main_part .signup_form .label_title {
+            padding: 0;
+            font-size: 16px;
+            margin: 5px 0;
+            width: 100%; }
+
+        .main_part .signup_form input {
+            padding: 10px 15px;
+            width: 350px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            border: 1px solid #212121; }
+
+        .main_part .signup_form input:focus {
+            outline: none; }
+
+        .main_part .signup_form .signupbtn {
+            color: #fff;
+            text-transform: uppercase;
+            background-color: #0097A7;
+            color: #fff;
+            padding: 10px 25px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            background: #0097A7;
+            -webkit-transition: all 0.25s;
+            -o-transition: all 0.25s;
+            transition: all 0.25s;
+            display: block;
+            margin-top: 20px;
+            cursor: pointer; }
+
+        .main_part .signup_form .signupbtn:hover {
+            background: #212121;
+            -webkit-transition: all 0.25s;
+            -o-transition: all 0.25s;
+            transition: all 0.25s; }
+
+        .current_course {
+            padding-top: 50px; }
+
+        .current_course .title_of_course {
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 25px; }
+
+        .current_course .course_descr {
+            margin-bottom: 10px; }
+
+        .current_course .list_of_tasks {
+            padding: 0;
+            margin: 10px 0 50px 0; }
+
+        .current_course .list_of_tasks .task_item {
+            cursor: pointer;
+            list-style-type: none;
+            background-color: #FBC02D;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            outline: none; }
+
+        .current_course .comments {
+            margin: 0;
+            padding: 0; }
+
+        .current_course .comments .comment {
+            list-style-type: none; }
+
+        .current_task {
+            padding-bottom: 150px; }
+
+        .current_task .current_task_title {
+            margin-bottom: 20px; }
+
+        .current_task .current_task_video {
+            outline: none;
+            width: 100%; }
+
+        /*==========  Desktop First  ==========*/
+        /* Large Devices, Wide Screens */
+        @media only screen and (max-width: 1200px) {
+            /**/ }
+
+        /* Medium Devices, Desktops */
+        @media only screen and (max-width: 992px) {
+            /**/ }
+
+        /* Small Devices, Tablets */
+        @media only screen and (max-width: 768px) {
+            /**/ }
+
+        /* Extra Small Devices, Phones */
+        @media only screen and (max-width: 480px) {
+            /**/ }
+
+        /* Custom, iPhone Retina */
+        @media only screen and (max-width: 320px) {
+            /**/ }
+
+        /*==========  Mobile First  ==========*/
+        /* Custom, iPhone Retina */
+        @media only screen and (min-width: 320px) {
+            /**/ }
+
+        /* Extra Small Devices, Phones */
+        @media only screen and (min-width: 480px) {
+            /**/ }
+
+        /* Small Devices, Tablets */
+        @media only screen and (min-width: 768px) {
+            /**/ }
+
+        /* Medium Devices, Desktops */
+        @media only screen and (min-width: 992px) {
+            /**/ }
+
+        /* Large Devices, Wide Screens */
+        @media only screen and (min-width: 1200px) {
+            /**/ }
+
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</div>
+
+
+
+</body>
+</html>
