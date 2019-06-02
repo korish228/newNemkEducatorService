@@ -1,40 +1,24 @@
 package com.nemk.educator.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tasks")
-public class Task implements Serializable {
+public class Task {
 
     @Id
     @Column(name = "task_id")
     private String id;
-
     private String title;
-
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Course.class)
+    private String url;
+    @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
-
-    private String urlToVideoFile;
 
     public Task() {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Task(String title,String urlToVideoFile, Course course) {
-        this();
-        this.title = title;
-        this.course = course;
-        this.urlToVideoFile = urlToVideoFile;
-    }
-
-    public Task(String id, String title,String urlToVideoFile, Course course) {
-        this(title,urlToVideoFile, course);
-        this.id = id;
-    }
 
     public String getId() {
         return id;
@@ -52,19 +36,19 @@ public class Task implements Serializable {
         this.title = title;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Course getCourse() {
         return course;
     }
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public String getUrlToVideoFile() {
-        return urlToVideoFile;
-    }
-
-    public void setUrlToVideoFile(String urlToVideoFile) {
-        this.urlToVideoFile = urlToVideoFile;
     }
 }

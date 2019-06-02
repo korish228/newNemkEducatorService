@@ -1,60 +1,53 @@
 package com.nemk.educator.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.UUID;
 
-
-//@Table(name = "user", uniqueConstraints = {
-//        @UniqueConstraint(columnNames={"email"})
-//})
 @Entity
-@Table(name = "user")
-public class User implements Serializable {
+public class User {
 
     @Id
     @Column(name = "user_id")
     private String id;
 
     @NotNull
-    private String username;
+    @Size(min = 2)
+    @NotEmpty
+    @Column(unique = true)
+    private String userName;
 
-    @Column(unique=true)
-    @NotNull
+    @Email
+    @Size(min = 4)
     private String email;
 
     @NotNull
+    @Size(min = 3)
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Course> courses;
 
-    private Date createdDate;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Role> roles;
+
 
     public User() {
-        this.courses = new ArrayList<>(0);
         this.id = UUID.randomUUID().toString();
-        this.createdDate = new Date();
     }
 
-    public User(String username, String email, String password) {
+    public User(String userName, String email, String password) {
         this();
-        this.username = username;
+        this.userName = userName;
         this.email = email;
         this.password = password;
-    }
-
-    public User(String id, String username, String email, String password, Date createdDate) {
-        this(username, email, password);
-        this.id = id;
-        this.createdDate = createdDate;
     }
 
     public String getId() {
@@ -65,12 +58,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -97,24 +90,23 @@ public class User implements Serializable {
         this.courses = courses;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", username='" + username + '\'' +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", courses=" + courses +
-                ", createdDate=" + createdDate +
+                ", roles=" + roles +
                 '}';
     }
 }
-

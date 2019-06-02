@@ -13,6 +13,28 @@
 <div th:fragment="styles">
     <style >
 
+        .search{
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .search .search_input{
+            width: 300px;
+            padding: 5px 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid #17252a;
+        }
+        .search .search_submit{
+            padding: 5px 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            background-color: #17252a;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            color: #ffffff;
+        }
         * {
             -webkit-box-sizing: border-box;
             box-sizing: border-box; }
@@ -71,14 +93,14 @@
             font-size: 36px; }
 
         h2 {
-            font-size: 18px;
+            font-size: 24px;
             margin: 0; }
 
         h3, p, a {
             font-size: 16px; }
 
         .top_line {
-            background-color: #0097A7;
+            background-color: #17252a;
             width: 100vw;
             padding: 25px 0;
             margin-bottom: 25px; }
@@ -104,7 +126,8 @@
             text-align: center; }
 
         .main_part .info_about_service img {
-            margin: 20px 0; }
+            margin-bottom: 20px;
+            width: 50%; }
 
         .main_part .info_about_service .buttons {
             display: -webkit-box;
@@ -117,7 +140,7 @@
             outline: none; }
 
         .main_part .info_about_service .buttons a {
-            background-color: #0097A7;
+            background-color: #17252a;
             color: #fff;
             padding: 10px 15px;
             -webkit-border-radius: 15px;
@@ -185,12 +208,12 @@
 
         .main_part .form_block .login-form .container-login-form-btn .login100-form-btn {
             text-transform: uppercase;
-            background-color: #0097A7;
+            background-color: #17252a;
             color: #fff;
             padding: 10px 25px;
             -webkit-border-radius: 15px;
             border-radius: 15px;
-            background: #0097A7;
+            background: #17252a;
             -webkit-transition: all 0.25s;
             -o-transition: all 0.25s;
             transition: all 0.25s;
@@ -231,12 +254,12 @@
         .main_part .signup_form .signupbtn {
             color: #fff;
             text-transform: uppercase;
-            background-color: #0097A7;
+            background-color: #17252a;
             color: #fff;
             padding: 10px 25px;
             -webkit-border-radius: 15px;
             border-radius: 15px;
-            background: #0097A7;
+            background: #17252a;
             -webkit-transition: all 0.25s;
             -o-transition: all 0.25s;
             transition: all 0.25s;
@@ -249,6 +272,72 @@
             -webkit-transition: all 0.25s;
             -o-transition: all 0.25s;
             transition: all 0.25s; }
+
+        .profile_page .profile_page_content {
+            min-height: 300px;
+            text-align: center; }
+
+        .profile_page .profile_page_content img {
+            margin-bottom: 20px; }
+
+        .profile_page .profile_page_content_left span {
+            font-size: 24px;
+            display: block; }
+
+        .profile_page .profile_page_content_right {
+            background-color: #17252a;
+            padding: 15px;
+            -webkit-border-radius: 15px;
+            border-radius: 15px; }
+
+        .profile_page .profile_page_content_right a {
+            display: block;
+            color: #fff;
+            width: 100%;
+            padding: 5px;
+            text-align: left;
+            margin: 5px 0; }
+
+        .profile_page .course_item {
+            background-color: #3aafa9;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            display: block;
+            color: #fff;
+            padding: 10px 15px; }
+
+        .profile_page .course_item .course_item_title {
+            font-size: 18px; }
+
+        .courses_part h2 {
+            margin-bottom: 20px; }
+
+        .courses_part .course_item {
+            background-color: #3aafa9;
+            color: #fff;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            padding: 15px;
+            width: 100%;
+            margin: 10px 0;
+            overflow: hidden; }
+
+        .courses_part .course_item .course_item_title {
+            font-size: 24px; }
+
+        .courses_part .course_item .course_item_title_descr {
+            font-size: 16px; }
+
+        .courses_part .course_item .course_item_link {
+            display: block;
+            float: right;
+            background-color: #17252a;
+            color: #fff;
+            -webkit-border-radius: 15px;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 18px; }
 
         .current_course {
             padding-top: 50px; }
@@ -291,49 +380,6 @@
         .current_task .current_task_video {
             outline: none;
             width: 100%; }
-
-        /*==========  Desktop First  ==========*/
-        /* Large Devices, Wide Screens */
-        @media only screen and (max-width: 1200px) {
-            /**/ }
-
-        /* Medium Devices, Desktops */
-        @media only screen and (max-width: 992px) {
-            /**/ }
-
-        /* Small Devices, Tablets */
-        @media only screen and (max-width: 768px) {
-            /**/ }
-
-        /* Extra Small Devices, Phones */
-        @media only screen and (max-width: 480px) {
-            /**/ }
-
-        /* Custom, iPhone Retina */
-        @media only screen and (max-width: 320px) {
-            /**/ }
-
-        /*==========  Mobile First  ==========*/
-        /* Custom, iPhone Retina */
-        @media only screen and (min-width: 320px) {
-            /**/ }
-
-        /* Extra Small Devices, Phones */
-        @media only screen and (min-width: 480px) {
-            /**/ }
-
-        /* Small Devices, Tablets */
-        @media only screen and (min-width: 768px) {
-            /**/ }
-
-        /* Medium Devices, Desktops */
-        @media only screen and (min-width: 992px) {
-            /**/ }
-
-        /* Large Devices, Wide Screens */
-        @media only screen and (min-width: 1200px) {
-            /**/ }
-
 
     </style>
 

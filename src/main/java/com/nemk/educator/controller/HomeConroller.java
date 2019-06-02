@@ -2,9 +2,11 @@ package com.nemk.educator.controller;
 
 import com.nemk.educator.model.User;
 import com.nemk.educator.repository.UserRepository;
+import com.nemk.educator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +19,9 @@ public class HomeConroller {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String home(Model model){
@@ -41,19 +46,22 @@ public class HomeConroller {
     }
 
     @PostMapping(value = "/signup")
-    public String signUp(Model model, @ModelAttribute @Valid User user , Errors errors){
+    public String signUp(Model model, @ModelAttribute @Valid User user , BindingResult bindingResult){
 
-        if (errors.hasErrors()){
+        System.out.println(user);
+        if (bindingResult.hasErrors()){
             model.addAttribute("title" ,"Sign Up page");
             model.addAttribute("user" ,user);
-            return "departments/add";
+            return "signup";
+        }
+        if (userService.isUserPresent(user.getEmail())){
+            model.addAttribute("exist", true);
+            return "signup";
         }
 
-//        System.out.println(user);
-        this.userRepository.save(user);
 
-        model.addAttribute("title" ,"User" + user.getUsername() + " been successfully added");
-        return "info/successful_page";
+        this.userService.createUser(user);
+        return "success";
     }
 
     @GetMapping(value = "/logout")

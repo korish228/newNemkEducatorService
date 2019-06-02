@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/styles :: head"></head>
+
+<body>
+
+    <div th:replace="fragments/header :: authorized_header">&nbsp;</div>
+
+    <section class="current_course">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12 ">
+                    <a href="courses.html">back</a>
+                    <h1 class="title_of_course">Java development</h1>
+                    <p class="course_descr">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam numquam, blanditiis non officia nobis quidem magni pariatur veritatis. Inventore laboriosam dicta illo perspiciatis deleniti dolore consequuntur nobis reiciendis animi. Dolore placeat dolores distinctio obcaecati quisquam ipsum magnam dolorum voluptates delectus amet autem, hic, a, exercitationem sunt vitae accusame in soluta, veritatis atque, dicta numquam recusandae molestias eaque iste laboriosam. Ad incidunt dolore ducimus vero beatae quam odio, est, voluptates officiis culpa deserunt! Nesciunt suscipit rerum natus, sed quasi minus perspiciatis praesentium dignissimos. Neque vel consequatur pariatur explicabo aperiam sint itaque voluptatum.</p>
+                    <h2>Tasks:</h2>
+                    <ul class="list_of_tasks">
+                        <li class="task_item">Overview</li>
+                        <li class="task_item">Sources</li>
+                        <li class="task_item">Checking</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="fragments/styles :: styles">&nbsp;</div>
+</body>
+</html>
