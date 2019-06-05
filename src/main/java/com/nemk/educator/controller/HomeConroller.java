@@ -60,6 +60,7 @@ public class HomeConroller {
         }
 
 
+        model.addAttribute("message", "Registration success!! Sign in to continue");
         this.userService.createUser(user);
         return "success";
     }

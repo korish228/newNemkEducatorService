@@ -29,4 +29,12 @@ public class CourseService {
     public Course findOne(String courseId) {
         return this.courseRepository.findById(courseId).get();
     }
+
+    public Course createCourse(Course course) {
+        return this.courseRepository.save(course);
+    }
+
+    public void deleteCourse(String courseId) {
+        this.courseRepository.deleteById(courseId);
+    }
 }

@@ -90,6 +90,11 @@ public class User {
         this.courses = courses;
     }
 
+    public boolean addCourses(Course course) {
+        return this.courses.add(course);
+    }
+
+
     public List<Role> getRoles() {
         return roles;
     }

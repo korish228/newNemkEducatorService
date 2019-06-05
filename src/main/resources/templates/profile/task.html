@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/styles :: head"></head>
+
+<body>
+
+<div th:replace="fragments/header :: authorized_header">&nbsp;</div>
+
+<section class="profile_page current_task">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <!-- <a href="current_course.html">back</a> -->
+                <h1 class="current_task_title" th:text="'Title: ' +${task.title}"></h1>
+
+                <video class="current_task_video" controls>
+                    <source src="img/videoplayback.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-3 ">
+                <div class="profile_page_content profile_page_content_right">
+                    <!--<a th:href="'/profile/' + ${username} + '/courses/' + ${courseId} + '/tasks/' + ${taskId} + '/delete' ">Delete Task</a>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div th:replace="fragments/styles :: styles">&nbsp;</div>
+</body>
+</html>

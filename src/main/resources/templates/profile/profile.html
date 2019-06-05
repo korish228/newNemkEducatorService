@@ -12,12 +12,12 @@
                 <div class="col-md-9  ">
                     <div class="profile_page_content profile_page_content_left">
                         <img src="https://img.icons8.com/metro/208/000000/administrator-male.png">
-                        <span th:text="${username}">@korishMannn</span>
+                        <span th:text="'@' +${username}"></span>
                     </div>
                 </div>
                 <div class="col-md-3  ">
                     <div class="profile_page_content profile_page_content_right">
-                        <a th:href="'/profile/newCourse/' + ${username}">Create Course</a>
+                        <a th:href="'/profile/' + ${username} + '/newCourse' ">Create Course</a>
                         <a href="">Upload Photo</a>
                         <a href="#">Saved Courses</a>
                     </div>

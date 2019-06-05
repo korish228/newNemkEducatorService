@@ -20,7 +20,8 @@
             <div class="course_item" th:each="course : ${courses}">
                 <span class="course_item_title" th:text="${course.title}">Java Development</span>
                 <p class="course_item_title_descr" th:text="${course.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. epudiandae maxime ex quibusdam inventore, voluptatibus quaerat velit sunt dicta non numquam quo pariatur. Sit.</p>
-                <a href="current_course.html" class="course_item_link">Learn</a>
+                <a th:href="'/users/' + ${course.user.userName}"  th:text="${course.user.userName}"></a>
+                <a th:href="'/courses/' + ${course.id}"  class="course_item_link">Learn</a>
             </div>
         </div>
     </div>

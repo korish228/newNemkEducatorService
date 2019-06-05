@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/styles :: head"></head>
+
+<body>
+
+<div th:replace="fragments/header :: authorized_header">&nbsp;</div>
+
+<section class="main_part profile_page">
+    <div class="container">
+        <div class="row">
+            <form method="post" th:object="${form} " action="/profile/newTask">
+                <!--<label th:for="title" class="label_title">Title:</label>-->
+                <input  th:field="*{task.title}" placeholder="Enter Title">
+                <!--<span th:errors="*{title}" class="error"></span>-->
+
+                <input type="hidden" name="courseId" th:value="*{course.id}" />
+
+
+                <button type="submit" class="signupbtn">New Task</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+
+<div th:replace="fragments/styles :: styles">&nbsp;</div>
+</body>
+</html>
