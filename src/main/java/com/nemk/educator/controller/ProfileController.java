@@ -5,11 +5,19 @@ import com.nemk.educator.service.CourseService;
 import com.nemk.educator.service.TaskService;
 import com.nemk.educator.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/profile")
@@ -23,6 +31,9 @@ public class ProfileController {
 
     @Autowired
     private TaskService taskService;
+
+    @Value("${upload.file.storage}")
+    private String pathToStorage;
 
     @GetMapping("/{username}")
     public String authorizedPage(@PathVariable String username, Model model){
@@ -72,13 +83,26 @@ public class ProfileController {
     }
 
     @PostMapping ("/newTask")
-    public String newTask(Model model , @ModelAttribute AddTaskForm addForm){
+    public String newTask(Model model , @ModelAttribute AddTaskForm addForm, @RequestParam("file") MultipartFile file){
 
         Task task = addForm.getTask();
+        System.out.println(task.getUrl());
 
         task.setCourse(courseService.findOne(addForm.getCourseId()));
 
-//        System.out.println(task.getCourse());
+        try {
+            Path path = Paths.get(pathToStorage, file.getOriginalFilename());
+            path.toFile().createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(path.toFile());
+            fileOutputStream.write(file.getBytes());
+            fileOutputStream.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+        task.setUrl(this.pathToStorage + file.getOriginalFilename());
+
 
         this.taskService.createTask(task);
 
