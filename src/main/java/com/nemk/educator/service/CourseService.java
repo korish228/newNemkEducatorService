@@ -1,14 +1,10 @@
 package com.nemk.educator.service;
 
 import com.nemk.educator.model.Course;
-import com.nemk.educator.model.Role;
-import com.nemk.educator.model.User;
 import com.nemk.educator.repository.CourseRepository;
-import com.nemk.educator.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

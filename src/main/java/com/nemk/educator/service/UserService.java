@@ -1,7 +1,6 @@
 package com.nemk.educator.service;
 
 import com.nemk.educator.model.Course;
-import com.nemk.educator.model.Role;
 import com.nemk.educator.model.User;
 import com.nemk.educator.repository.CourseRepository;
 import com.nemk.educator.repository.UserRepository;
@@ -22,11 +21,6 @@ public class UserService {
 
     public void createUser(User user){
         user.setPassword(user.getPassword());
-        Role role = new Role("USER");
-        List<Role> roles = new ArrayList<>();
-        roles.add(role);
-        user.setRoles(roles);
-
         this.userRepository.save(user);
     }
 
@@ -36,7 +30,7 @@ public class UserService {
 
 
     public User findOne(String userName){
-        return this.userRepository.findByUserName(userName);
+        return this.userRepository.findByUserName(userName).get();
     }
 
     public boolean isUserPresent(String email) {

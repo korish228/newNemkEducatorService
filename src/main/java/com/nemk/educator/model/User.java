@@ -32,15 +32,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Course> courses;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id"))
-    private List<Role> roles;
+    private String role;
 
 
     public User() {
         this.id = UUID.randomUUID().toString();
+        this.role = Role.USER.getName();
     }
 
     public User(String userName, String email, String password) {
@@ -48,6 +45,13 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String userName,  String email, String password, Role role) {
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.role = role.getName();
     }
 
     public String getId() {
@@ -94,24 +98,11 @@ public class User {
         return this.courses.add(course);
     }
 
-
-    public List<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", courses=" + courses +
-                ", roles=" + roles +
-                '}';
+    public void setRole(String role) {
+        this.role = role;
     }
 }

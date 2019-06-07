@@ -14,9 +14,10 @@
                 <h1 class="current_task_title" th:text="'Title: ' +${task.title}"></h1>
 
                 <video class="current_task_video" controls>
-                    <source src="img/videoplayback.mp4" type="video/mp4">
+                    <source th:src="@{${videoUrl}}"  type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <img th:src="@{/src/main/resources/storage/users/korish/courses/Phyton for Begginers/tasks/Introduction 2/main_page.jpg}" alt="photo">
             </div>
             <div class="col-md-3 ">
                 <div class="profile_page_content profile_page_content_right">
@@ -26,6 +27,8 @@
         </div>
     </div>
 </section>
+
+
 
 
 <div th:replace="fragments/styles :: styles">&nbsp;</div>

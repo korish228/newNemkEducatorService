@@ -1,5 +1,8 @@
-package com.nemk.educator.model;
+package com.nemk.educator.model.forms;
 
+
+import com.nemk.educator.model.Course;
+import com.nemk.educator.model.Task;
 
 public class AddTaskForm {
 

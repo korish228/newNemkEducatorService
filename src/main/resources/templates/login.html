@@ -15,21 +15,21 @@
                         <p style="color: red ">Invalid UserName Or Password</p>
                     </div>
 
-                    <form class="login-form validate-form" >
+                    <form class="login-form validate-form" th:action="@{/appLogin}" method="POST">
 						<span class="login100-form-title">
 							Member Login
 						</span>
 
 
                         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                            <input class="input100" type="text" id="email" name="email" placeholder="Email">
+                            <input class="input100" type="text" id="email" name="app_username" placeholder="Email">
                             <span class="symbol-input">
 								<i class="fa fa-envelope" aria-hidden="true"></i>
 							</span>
                         </div>
 
                         <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                            <input class="input100" type="password" name="password" id="password" placeholder="Password">
+                            <input class="input100" type="password" name="app_password" id="password" placeholder="Password">
                             <span class="symbol-input">
 								<i class="fa fa-lock" aria-hidden="true"></i>
 							</span>
