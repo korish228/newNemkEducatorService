@@ -31,6 +31,7 @@ public class CourseService {
     }
 
     public void deleteCourse(String courseId) {
+//        System.out.println("deleting");
         this.courseRepository.deleteById(courseId);
     }
 }

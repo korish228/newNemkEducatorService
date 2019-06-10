@@ -6,7 +6,7 @@
 
 <div th:replace="fragments/header :: authorized_header">&nbsp;</div>
 
-<section class="main_part profile_page current_course">
+<section class="profile_page current_course">
     <div class="container">
         <div class="row">
             <div class="col-md-9 ">
@@ -18,7 +18,7 @@
 
                 <ul class="list_of_tasks">
                     <li class="task_item" th:each="task : ${tasks}">
-                        <a  th:href="'/profile/' + ${username} + '/courses/' + ${course.id} + '/tasks/' +${task.id}" th:text="${task.title}"></a>
+                        <a  th:href="'/current/courses/' + ${course.id} + '/tasks/' +${task.id}" th:text="${task.title}"></a>
                     </li>
                 </ul>
 
@@ -26,8 +26,10 @@
             </div>
             <div class="col-md-3 ">
                 <div class="profile_page_content profile_page_content_right">
-                    <a th:href="'/profile/' + ${username} + '/courses/' +${course.id} + '/newTask' ">Create Task</a>
-                    <a th:href="'/profile/' + ${username} + '/courses/' +${course.id} + '/delete'">Delete Course</a>
+                    <a th:href="'/current/courses/' + ${course.id} + '/newTask' ">Create Task</a>
+                    <!--<a th:href="'/current/courses/' +${course.id} + '/delete'">Delete Course</a>-->
+                    <!--"/current/courses/{courseId}/delete-->
+
                 </div>
             </div>
         </div>

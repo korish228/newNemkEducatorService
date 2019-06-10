@@ -21,8 +21,8 @@ import java.nio.file.Paths;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/profile")
-public class ProfileController {
+//@RequestMapping("/profile")
+public class HomeController {
 
     @Autowired
     private UserService userService;
@@ -36,25 +36,25 @@ public class ProfileController {
     @Value("${upload.file.storage}")
     private String pathToStorage;
 
-    @GetMapping
-    public String mainAuthorizedPage(Principal principal){
-        System.out.println("redirecting");
-        return "redirect:/profile/" + principal.getName();
-    }
 
-    @GetMapping("/{username}")
-    public String authorizedPage(@PathVariable String username, Model model){
-        User user = this.userService.findOne(username);
+    @GetMapping
+    public String homePage(Model model, Principal principal){
+        if (principal == null){
+            return "index";
+        }
+
+        System.out.println(principal.getName());
+        User user = this.userService.findOne(principal.getName());
         model.addAttribute("user" ,user );
         model.addAttribute("username" ,user.getUserName());
         model.addAttribute("courses" ,this.userService.getCoursesByUserName(user.getUserName()) );
 
         return "profile/profile";
     }
-    @GetMapping("/{username}/newCourse")
-    public String newCourse(@PathVariable String username, Model model ){
+    @GetMapping("/newCourse")
+    public String newCourse(Principal principal, Model model ){
         Course course = new Course();
-        User user = this.userService.findOne(username);
+        User user = this.userService.findOne(principal.getName());
 
         AddCourseForm addForm = new AddCourseForm(user,course);
 
@@ -79,11 +79,24 @@ public class ProfileController {
         File file1 = pathAndCourses.toFile();
         file1.mkdir();
 
-        return "redirect:/profile/"+course.getUser().getUserName();
+        return "redirect:/";
     }
 
-    @GetMapping("/{username}/courses/{courseId}/newTask")
-    public String newTask(@PathVariable String courseId,@PathVariable String username, Model model ){
+    @GetMapping("/current/courses/{courseId}")
+    public String course(Model model, Principal principal, @PathVariable String courseId){
+
+        model.addAttribute("course", this.courseService.findOne(courseId));
+        model.addAttribute("tasks", this.taskService.getTasksBycourseId(courseId));
+        model.addAttribute("username", principal.getName());
+
+        return "profile/course";
+    }
+
+
+
+
+    @GetMapping("/current/courses/{courseId}/newTask")
+    public String newTask(@PathVariable String courseId, Model model ){
 
         Task task = new Task();
         Course course =this.courseService.findOne(courseId);
@@ -97,7 +110,13 @@ public class ProfileController {
     }
 
     @PostMapping ("/newTask")
-    public String newTask(Model model , @ModelAttribute AddTaskForm addForm, @RequestParam("file") MultipartFile file){
+    public String newTask(Model model,Principal principal, @ModelAttribute AddTaskForm addForm, @RequestParam("file") MultipartFile file){
+
+//        if (principal ==null){
+//            System.out.println("fuck");
+//            return "/";
+//        }
+        System.out.println("adding task");
 
         Task task = addForm.getTask();
         task.setCourse(courseService.findOne(addForm.getCourseId()));
@@ -106,10 +125,7 @@ public class ProfileController {
         Path path = Paths.get(pathBaseDir.toString(),file.getOriginalFilename());
         task.setUrl(path + "");
 
-
         this.taskService.createTask(task);
-
-
 
         if (file!=null) {
             try {
@@ -126,44 +142,41 @@ public class ProfileController {
 
         }
 
-        return "redirect:/profile/"+ task.getCourse().getUser().getUserName() +"/courses/" +task.getCourse().getId();
+        return "redirect:/current/courses/tasks/" +task.getCourse().getId();
     }
-
-    @GetMapping("/{username}/courses/{courseId}")
-    public String course(Model model, @PathVariable String username, @PathVariable String courseId){
-
-        model.addAttribute("course", this.courseService.findOne(courseId));
-        model.addAttribute("tasks", this.taskService.getTasksBycourseId(courseId));
-        model.addAttribute("username", username);
-
-        return "profile/course";
-    }
-
-
-    @DeleteMapping
-    @RequestMapping(value = "/{username}/courses/{courseId}/delete")
-    public String deleteCourse(Model model, @PathVariable String username, @PathVariable String courseId){
-        this.courseService.deleteCourse(courseId);
-
-        return "redirect:/profile/{username}";
-    }
-
-    @GetMapping("/{username}/courses/{courseId}/tasks/{taskId}")
-    public String task(Model model, @PathVariable String username, @PathVariable String courseId, @PathVariable String taskId){
+    @GetMapping("/current/courses/{courseId}/tasks/{taskId}")
+    public String task(Model model, Principal principal, @PathVariable String courseId, @PathVariable String taskId){
+//        System.out.println("tasks opens");
         Task task = this.taskService.getTaskById(taskId);
         model.addAttribute("task", task);
         model.addAttribute("courseId", courseId);
         model.addAttribute("taskId", taskId);
-        model.addAttribute("username", username);
-        model.addAttribute("videoUrl", task.getUrl());
+        model.addAttribute("username", principal.getName());
+
+        File video = new File(task.getUrl());
+
+        System.out.println(video.getAbsoluteFile());
+//        System.out.println(video.t);
+
+        model.addAttribute("video", video);
 
         return "profile/task";
     }
 
-    @DeleteMapping("/{username}/courses/{courseId}/tasks/{taskId}/delete")
-    public String deleteTask(Model model, @PathVariable String username, @PathVariable String courseId, @PathVariable String taskId){
-        this.taskService.deleteTask(taskId);
 
-        return "redirect:/profile/{username}/courses/{courseId}/tasks/{taskId}";
-    }
+//    @DeleteMapping("/current/courses/{courseId}/delete")
+//    public String deleteCourse(Model model, @PathVariable String courseId){
+//        this.courseService.deleteCourse(courseId);
+//
+//        return "redirect:/";
+//    }
+
+
+//
+//    @DeleteMapping("/{username}/courses/{courseId}/tasks/{taskId}/delete")
+//    public String deleteTask(Model model, @PathVariable String username, @PathVariable String courseId, @PathVariable String taskId){
+//        this.taskService.deleteTask(taskId);
+//
+//        return "redirect:/profile/{username}/courses/{courseId}/tasks/{taskId}";
+//    }
 }

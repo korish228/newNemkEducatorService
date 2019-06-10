@@ -9,9 +9,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+//https://www.youtube.com/watch?v=lIgFe20dYq4
+
 @SpringBootApplication
 public class NemkEduactorApplication {
-
+//    https://www.youtube.com/watch?v=hZl-JnoS_ro
     public static void main(String[] args) {
         SpringApplication.run(NemkEduactorApplication.class, args);
     }

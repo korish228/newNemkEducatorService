@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-3  ">
                     <div class="profile_page_content profile_page_content_right">
-                        <a th:href="'/profile/' + ${username} + '/newCourse' ">Create Course</a>
+                        <a th:href="'/newCourse'">Create Course</a>
                         <a href="">Upload Photo</a>
                         <a href="#">Saved Courses</a>
                     </div>
@@ -26,7 +26,7 @@
 
                 <div class="col-md-9 ">
                     <h2>Courses:</h2>
-                    <a th:each="course : ${courses}" href="" class="course_item" th:href="'/profile/' + ${username} + '/courses/' +${course.id} ">
+                    <a th:each="course : ${courses}" href="" class="course_item" th:href="'/current/courses/' +${course.id} ">
                         <span class="course_item_title" th:text="${course.title}"></span>
                     </a>
                 </div>

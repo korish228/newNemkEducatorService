@@ -9,15 +9,17 @@
 <section class="profile_page current_task">
     <div class="container">
         <div class="row">
+
             <div class="col-md-9">
                 <!-- <a href="current_course.html">back</a> -->
                 <h1 class="current_task_title" th:text="'Title: ' +${task.title}"></h1>
 
-                <video class="current_task_video" controls>
-                    <source th:src="@{${videoUrl}}"  type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <img th:src="@{/src/main/resources/storage/users/korish/courses/Phyton for Begginers/tasks/Introduction 2/main_page.jpg}" alt="photo">
+                <!--<video class="current_task_video" controls>-->
+                    <!--<source th:src="${video}" >-->
+                    <!--&lt;!&ndash;<source th:src="@{'https://music.youtube.com/watch?v=RyRyfU9cl58&list=RDAMVMx_xuXowwV98'}" >&ndash;&gt;-->
+                    <!--&lt;!&ndash;<img src="" alt="">&ndash;&gt;-->
+                    <!--Your browser does not support the video tag.-->
+                <!--</video>-->
             </div>
             <div class="col-md-3 ">
                 <div class="profile_page_content profile_page_content_right">
