@@ -37,7 +37,7 @@ public class User {
 
     public User() {
         this.id = UUID.randomUUID().toString();
-        this.role = Role.USER.getName();
+        this.role = "ROLE_" + Role.USER.getName();
     }
 
     public User(String userName, String email, String password) {

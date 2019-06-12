@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/styles :: head"></head>
+
+<body>
+
+    <div th:replace="fragments/header :: admin_header">&nbsp;</div>
+    <section class="main_part profile_page">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-9  ">
+                    <div class="profile_page_content profile_page_content_left">
+                        <img src="https://img.icons8.com/metro/208/000000/administrator-male.png">
+                        <span th:text="'@' +${username}"></span>
+                    </div>
+                </div>
+                <div class="col-md-3  ">
+                    <div class="profile_page_content profile_page_content_right">
+                        <a th:href="'/newCourse'">Create Course</a>
+                        <a href="">Upload Photo</a>
+                        <a href="#">Saved Courses</a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-9 ">
+                    <h2>Courses:</h2>
+                    <a th:each="course : ${courses}" href="" class="course_item" th:href="'/current/courses/' +${course.id} ">
+                        <span class="course_item_title" th:text="${course.title}"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <div th:replace="fragments/styles :: styles">&nbsp;</div>
+</body>
+</html>

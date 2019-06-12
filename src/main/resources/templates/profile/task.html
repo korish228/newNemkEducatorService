@@ -23,7 +23,8 @@
             </div>
             <div class="col-md-3 ">
                 <div class="profile_page_content profile_page_content_right">
-                    <!--<a th:href="'/profile/' + ${username} + '/courses/' + ${courseId} + '/tasks/' + ${taskId} + '/delete' ">Delete Task</a>-->
+                    <a th:href="@{/current/courses/}+ ${courseId} + @{/tasks/delete/} + ${task.id}">Delete Task</a>
+                    <!--/current/courses/{courseId}/tasks/delete/{taskId}-->
                 </div>
             </div>
         </div>

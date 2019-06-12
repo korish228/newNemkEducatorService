@@ -27,9 +27,7 @@
             <div class="col-md-3 ">
                 <div class="profile_page_content profile_page_content_right">
                     <a th:href="'/current/courses/' + ${course.id} + '/newTask' ">Create Task</a>
-                    <!--<a th:href="'/current/courses/' +${course.id} + '/delete'">Delete Course</a>-->
-                    <!--"/current/courses/{courseId}/delete-->
-
+                    <a th:href="@{/current/courses/delete/} + ${course.id}">Delete Course</a>
                 </div>
             </div>
         </div>

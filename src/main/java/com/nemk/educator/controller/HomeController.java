@@ -3,6 +3,7 @@ package com.nemk.educator.controller;
 import com.nemk.educator.model.*;
 import com.nemk.educator.model.forms.AddCourseForm;
 import com.nemk.educator.model.forms.AddTaskForm;
+import com.nemk.educator.repository.CourseRepository;
 import com.nemk.educator.service.CourseService;
 import com.nemk.educator.service.TaskService;
 import com.nemk.educator.service.UserService;
@@ -29,6 +30,8 @@ public class HomeController {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private CourseRepository courseRepository;
 
     @Autowired
     private TaskService taskService;
@@ -39,17 +42,25 @@ public class HomeController {
 
     @GetMapping
     public String homePage(Model model, Principal principal){
+
+
+
         if (principal == null){
             return "index";
         }
 
-        System.out.println(principal.getName());
         User user = this.userService.findOne(principal.getName());
+
+        if (user.getRole().equals("ROLE_ADMIN")){
+            return "redirect:/admin";
+        }
+        System.out.println(principal);
+
         model.addAttribute("user" ,user );
         model.addAttribute("username" ,user.getUserName());
         model.addAttribute("courses" ,this.userService.getCoursesByUserName(user.getUserName()) );
 
-        return "profile/profile";
+            return "profile/profile";
     }
     @GetMapping("/newCourse")
     public String newCourse(Principal principal, Model model ){
@@ -146,7 +157,6 @@ public class HomeController {
     }
     @GetMapping("/current/courses/{courseId}/tasks/{taskId}")
     public String task(Model model, Principal principal, @PathVariable String courseId, @PathVariable String taskId){
-//        System.out.println("tasks opens");
         Task task = this.taskService.getTaskById(taskId);
         model.addAttribute("task", task);
         model.addAttribute("courseId", courseId);
@@ -155,28 +165,25 @@ public class HomeController {
 
         File video = new File(task.getUrl());
 
-        System.out.println(video.getAbsoluteFile());
-//        System.out.println(video.t);
-
         model.addAttribute("video", video);
 
         return "profile/task";
     }
 
 
-//    @DeleteMapping("/current/courses/{courseId}/delete")
-//    public String deleteCourse(Model model, @PathVariable String courseId){
-//        this.courseService.deleteCourse(courseId);
-//
-//        return "redirect:/";
-//    }
+    @RequestMapping("/current/courses/delete/{courseId}")
+    public String deleteCourse(Model model, @PathVariable String courseId){
+        this.courseRepository.deleteById(courseId);
+        model.addAttribute("message", "Course was successfully deleted");
+        return "redirect:/";
+    }
+
+    @RequestMapping("/current/courses/{courseId}/tasks/delete/{taskId}")
+    public String deleteCourse(Model model, @PathVariable String courseId, @PathVariable String taskId){
+        this.taskService.deleteTask(taskId);
+        model.addAttribute("message", "Course was successfully deleted");
+        return "redirect:/";
+    }
 
 
-//
-//    @DeleteMapping("/{username}/courses/{courseId}/tasks/{taskId}/delete")
-//    public String deleteTask(Model model, @PathVariable String username, @PathVariable String courseId, @PathVariable String taskId){
-//        this.taskService.deleteTask(taskId);
-//
-//        return "redirect:/profile/{username}/courses/{courseId}/tasks/{taskId}";
-//    }
 }

@@ -42,12 +42,19 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return this.userRepository.findAll();
+        return this.userRepository.findAllByRole("ROLE_USER");
     }
+
+//    public List<User> findAllAdmins() {
+//        return this.userRepository.findAllByRole("ROLE_ADMIN");
+//    }
 
     public List<User> findByEmailOrUserName(String name) {
         return this.userRepository.findAllByEmailLikeOrUserNameLike("%" + name + "%" ,"%" + name + "%" );
     }
 
 
+    public void delete(User user) {
+        this.userRepository.delete(user);
+    }
 }
