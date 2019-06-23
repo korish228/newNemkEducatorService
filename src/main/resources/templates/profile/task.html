@@ -14,12 +14,24 @@
                 <!-- <a href="current_course.html">back</a> -->
                 <h1 class="current_task_title" th:text="'Title: ' +${task.title}"></h1>
 
-                <!--<video class="current_task_video" controls>-->
-                    <!--<source th:src="${video}" >-->
-                    <!--&lt;!&ndash;<source th:src="@{'https://music.youtube.com/watch?v=RyRyfU9cl58&list=RDAMVMx_xuXowwV98'}" >&ndash;&gt;-->
-                    <!--&lt;!&ndash;<img src="" alt="">&ndash;&gt;-->
-                    <!--Your browser does not support the video tag.-->
-                <!--</video>-->
+                <!--<p th:attr="src=@{'/files/' + ${courseId}}"></p>-->
+
+                <!--<a th:attr="href=@{'/files/' + ${courseId}}"> lalala</a>-->
+
+                <a th:attr="src=@{/videosrc(taskId=${taskId})}">lalla</a>
+                <!--<a th:attr="href=@{'/files/' + ${courseId}}"> lalala</a>-->
+                <!--<a src="@{'/files/' + ${taskId}}"> lalala</a>-->
+                <!--<a th:src="@{/videosrc(id=${taskId})}" th:text="@{/videosrc(id=${taskId})}">lala</a>-->
+
+                <!--<img th:attr="src=@{'/files/' + ${courseId}}" alt="haven` t any photo">-->
+                <video class="current_task_video" controls>
+                     <!--<source th:src="${video}" >-->
+                    <!--<source th:src="@{'/files/' + ${taskId}}"/>-->
+                    <!--<source th:attr="src=@{'/files/' + ${taskId}}"/>-->
+                    <!--<img src="" alt="">-->
+                    <source th:src="@{/videosrc(taskId=${taskId})}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
             <div class="col-md-3 ">
                 <div class="profile_page_content profile_page_content_right">

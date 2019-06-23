@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 //https://www.youtube.com/watch?v=lIgFe20dYq4
 //    https://www.youtube.com/watch?v=hZl-JnoS_ro
+//https://stackoverflow.com/questions/49608146/spring-boot-html-5-video-streaming
 
 @SpringBootApplication
 public class NemkEduactorApplication {
